@@ -8,160 +8,18 @@
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
 </head>
 
 <body>
     <div class="displayScreen">
+        <div class="title">The Office Trivia!</div>
         <div class="score"></div>
         <div class="timeBox"></div>
         <div class="questions"></div>
         <div class="buttons"></div>
     </div>
+    <script src="assets/javascript/app.js"></script>
 </body>
-
-
-<script>
-    var questions = [
-        {       // 0
-            question: "Who is the GOAT of basketball",
-            corrAns: "Michael Jordan",
-            answer1: "Shaq O'neil",
-            answer2: "Kobe Bryant",
-            answer3: "Lebron James"
-        }, {    // 1
-            question: "heyaerear",
-            corrAns: "yoyoaeraer",
-            answer1: "nah..aerer",
-            answer2: "okaaewraewry",
-            answer3: "alrighty-oaereawr"
-        }, {    // 2
-            question: "",
-            corrAns: "",
-            answer1: "",
-            answer2: "",
-            answer3: ""
-        }, {    // 3    
-            question: "",
-            corrAns: "",
-            answer1: "",
-            answer2: "",
-            answer3: ""
-        }, {    // 4
-            question: "",
-            corrAns: "",
-            answer1: "",
-            answer2: "",
-            answer3: ""
-        }
-    ]
-    var time = 3;
-    var correctCount = 0;
-    var incorrectCount = 0;
-    var i = 0;
-    displayTime();
-    displayStats();
-
-    nextQuestion(i);
-    function nextQuestion(i) {   // Should be in a for loop.
-        displayQuestions(i);
-        console.log("Correct answer is: " + questions[i].corrAns)
-        $("button").on("click", function () {
-            var answer = $(this).attr("response");
-            if (answer === questions[i].corrAns) {
-                alert("correct");
-                time = 30;
-                correctCount++;
-                displayStats();
-                i++;
-                nextQuestion(i);
-            }
-            else {
-                resetGame();
-                alert("wrong")
-            }
-        });
-    }
-
-    function displayQuestions(i) {
-        var randomCount = Math.floor(Math.random() * 4);
-        console.log(randomCount);
-        switch (randomCount) {
-            case 0:
-                $(".questions").text(questions[i].question);
-                $(".buttons").html("");
-                $(".buttons").append("<button class='options' id='q1' response='" + questions[i].corrAns + "'>" + questions[i].corrAns + "</button>");
-                $(".buttons").append("<button class='options' id='q2' response='" + questions[i].answer1 + "'>" + questions[i].answer1 + "</button>");
-                $(".buttons").append("<button class='options' id='q3' response='" + questions[i].answer2 + "'>" + questions[i].answer2 + "</button>");
-                $(".buttons").append("<button class='options' id='q4' response='" + questions[i].answer3 + "'>" + questions[i].answer3 + "</button>");
-                break;
-
-            case 1:
-                $(".questions").text(questions[i].question);
-                $(".buttons").html("");
-                $(".buttons").append("<button class='options' id='q2' response='" + questions[i].answer1 + "'>" + questions[i].answer1 + "</button>");
-                $(".buttons").append("<button class='options' id='q1' response='" + questions[i].corrAns + "'>" + questions[i].corrAns + "</button>");
-                $(".buttons").append("<button class='options' id='q3' response='" + questions[i].answer2 + "'>" + questions[i].answer2 + "</button>");
-                $(".buttons").append("<button class='options' id='q4' response='" + questions[i].answer3 + "'>" + questions[i].answer3 + "</button>");
-                break;
-
-            case 2:
-                $(".questions").text(questions[i].question);
-                $(".buttons").html("");
-                $(".buttons").append("<button class='options' id='q2' response='" + questions[i].answer1 + "'>" + questions[i].answer1 + "</button>");
-                $(".buttons").append("<button class='options' id='q3' response='" + questions[i].answer2 + "'>" + questions[i].answer2 + "</button>");
-                $(".buttons").append("<button class='options' id='q1' response='" + questions[i].corrAns + "'>" + questions[i].corrAns + "</button>");
-                $(".buttons").append("<button class='options' id='q4' response='" + questions[i].answer3 + "'>" + questions[i].answer3 + "</button>");
-                break;
-
-            case 3:
-                $(".questions").text(questions[i].question);
-                $(".buttons").html("");
-                $(".buttons").append("<button class='options' id='q2' response='" + questions[i].answer1 + "'>" + questions[i].answer1 + "</button>");
-                $(".buttons").append("<button class='options' id='q3' response='" + questions[i].answer2 + "'>" + questions[i].answer2 + "</button>");
-                $(".buttons").append("<button class='options' id='q4' response='" + questions[i].answer3 + "'>" + questions[i].answer3 + "</button>");
-                $(".buttons").append("<button class='options' id='q1' response='" + questions[i].corrAns + "'>" + questions[i].corrAns + "</button>");
-                break;
-
-        }
-    }
-
-    function displayTime() {
-        $(".timeBox").text("you have " + time + " seconds left")
-        var timer = setInterval(function () {
-            if (time < 1) {
-                clearInterval(timer);
-                resetGame();
-            }
-            else {
-                time--;
-                $(".timeBox").text("you have " + time + " seconds left")
-            }
-        }, 1000)
-    }
-
-    function loseScreen() {
-
-    }
-    function displayStats() {
-        $(".score").text(correctCount);
-    }
-    function resetGame() {
-        $(".displayScreen").empty();
-        
-        $(".displayScreen").html("Game Over <br> Try again? <button id='yes'>yes</button> <button>no</button>");
-        $("button").on("click", function () {
-            alert("button clicked")
-            var answer = $(this).attr("id");
-            if (answer === "yes") {
-                alert("yes")
-                i = 0;
-                nextQuestion(i);
-            }
-            else {
-                $("body").html(":(");
-            }
-        });
-    }
-</script>
 
 </html>
